@@ -6,15 +6,17 @@ public class BallEmitter : MonoBehaviour
 {
     public GameObject ball;
     public GameObject target;
-    public float span;
+    public float minSpan;
+    public float maxSpan;
 
     private GameObject emittedBall;
     private float currentTime = 0f;
+    private float span;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        span = (minSpan + maxSpan) / 2.0f;
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class BallEmitter : MonoBehaviour
         int rand = Random.Range(0, 100);
         if (rand < 5)
         {
-            span = Random.Range(0.5f, 1.5f);
+            span = Random.Range(minSpan, maxSpan);
         }
     }
 }
