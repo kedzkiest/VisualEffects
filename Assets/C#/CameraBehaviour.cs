@@ -11,8 +11,6 @@ public class CameraBehaviour : MonoBehaviour
     public float zRotateSpeed;
     public float moveSpeed;
 
-    public int mode;
-
     public CinemachineVirtualCamera vCam1;
     public CinemachineVirtualCamera vCam2;
 
@@ -25,30 +23,24 @@ public class CameraBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mode == 1)
-        {
-            transform.Rotate(xRotateSpeed * Time.deltaTime, yRotateSpeed * Time.deltaTime,
+        vCam1.transform.Rotate(xRotateSpeed * Time.deltaTime, yRotateSpeed * Time.deltaTime,
                 zRotateSpeed * Time.deltaTime);
+
+
+        vCam2.transform.position = new Vector3(vCam2.transform.position.x + moveSpeed * Time.deltaTime * Mathf.Cos(Time.time), 0,
+                vCam2.transform.position.z + moveSpeed * Time.deltaTime * Mathf.Sin(Time.time));
+
+
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            vCam1.Priority = 10;
+            vCam2.Priority = 9;
         }
 
-        if (mode == 2)
+        if (Input.GetKey(KeyCode.Alpha2))
         {
-            transform.position = new Vector3(moveSpeed * Time.deltaTime * Mathf.Cos(Time.time), 0,
-                moveSpeed * Time.deltaTime * Mathf.Sin(Time.time));
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (vCam1.Priority >= vCam2.Priority)
-            {
-                vCam1.Priority = 0;
-                vCam2.Priority = 10;
-            }
-            else
-            {
-                vCam1.Priority = 10;
-                vCam2.Priority = 0;
-            }
+            vCam1.Priority = 9;
+            vCam2.Priority = 10;
         }
     }
 }
