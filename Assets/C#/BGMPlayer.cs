@@ -16,12 +16,12 @@ public class BGMPlayer : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.M))
         {
-            audioSource.volume += 0.01f;
+            audioSource.volume += 0.005f;
         }
 
         if (Input.GetKey(KeyCode.L))
         {
-            audioSource.volume -= 0.01f;
+            audioSource.volume -= 0.005f;
         }
     }
 }
